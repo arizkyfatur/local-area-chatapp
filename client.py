@@ -9,7 +9,7 @@ def client_receive():
     while True:
         try:
             message = client.recv(1024).decode('utf-8')
-            if message == "alias?":
+            if message == "user?":
                 client.send(alias.encode('utf-8'))
             else:
                 print(message)

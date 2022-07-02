@@ -26,7 +26,7 @@ def handle_client(client):
             clients.remove(client)
             client.close()
             alias = aliases[index]
-            broadcast(f'{alias} has left the chat room!'.encode('utf-8'))
+            broadcast(f'{alias} telah meninggalkan room chat !'.encode('utf-8'))
             aliases.remove(alias)
             break
 # Main function to receive the clients connection
@@ -41,9 +41,9 @@ def receive():
         alias = client.recv(1024)
         aliases.append(alias)
         clients.append(client)
-        print(f'The alias of this client is {alias}'.encode('utf-8'))
-        broadcast(f'{alias} has connected to the chat room'.encode('utf-8'))
-        client.send('you are now connected!'.encode('utf-8'))
+        print(f'User dari client ini yaitu : {alias}'.encode('utf-8'))
+        broadcast(f'{alias} Telah bergabung ke dalam chat !'.encode('utf-8'))
+        client.send('Kamu telah terhubung !'.encode('utf-8'))
         thread = threading.Thread(target=handle_client, args=(client,))
         thread.start()
 
