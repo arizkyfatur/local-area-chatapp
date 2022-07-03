@@ -13,7 +13,7 @@ def broadcast(message):
     for client in clients:
         client.send(message)
 
-# Function to handle clients'connections
+
 
 
 def handle_client(client):
@@ -29,7 +29,7 @@ def handle_client(client):
             broadcast(f'{user} telah meninggalkan room chat !'.encode('utf-8'))
             users.remove(user)
             break
-# Main function to receive the clients connection
+
 
 
 def receive():
