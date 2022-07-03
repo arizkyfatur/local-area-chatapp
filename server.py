@@ -36,7 +36,7 @@ def receive():
     while True:
         print('Server sedang berjalan dan merekam ...')
         client, address = server.accept()
-        print(f'connection is established with {str(address)}')
+        print(f'Koneksi telah terhubung dengan {str(address)}')
         client.send('user?'.encode('utf-8'))
         user = client.recv(1024)
         users.append(user)
