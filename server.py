@@ -6,7 +6,7 @@ server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 server.bind((host, port))
 server.listen()
 clients = []
-aliases = []
+users = []
 
 
 def broadcast(message):
@@ -25,9 +25,9 @@ def handle_client(client):
             index = clients.index(client)
             clients.remove(client)
             client.close()
-            alias = aliases[index]
-            broadcast(f'{alias} telah meninggalkan room chat !'.encode('utf-8'))
-            aliases.remove(alias)
+            user = users[index]
+            broadcast(f'{user} telah meninggalkan room chat !'.encode('utf-8'))
+            users.remove(user)
             break
 # Main function to receive the clients connection
 
@@ -37,12 +37,12 @@ def receive():
         print('Server sedang berjalan dan merekam ...')
         client, address = server.accept()
         print(f'connection is established with {str(address)}')
-        client.send('alias?'.encode('utf-8'))
-        alias = client.recv(1024)
-        aliases.append(alias)
+        client.send('user?'.encode('utf-8'))
+        user = client.recv(1024)
+        users.append(user)
         clients.append(client)
-        print(f'User dari client ini yaitu : {alias}'.encode('utf-8'))
-        broadcast(f'{alias} Telah bergabung ke dalam chat !'.encode('utf-8'))
+        print(f'User dari client ini yaitu : {user}'.encode('utf-8'))
+        broadcast(f'{user} Telah bergabung ke dalam chat !'.encode('utf-8'))
         client.send('Kamu telah terhubung !'.encode('utf-8'))
         thread = threading.Thread(target=handle_client, args=(client,))
         thread.start()

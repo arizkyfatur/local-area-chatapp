@@ -1,6 +1,6 @@
 import threading
 import socket
-alias = input('Masukkan nama user >>> ')
+user = input('Masukkan nama user >>> ')
 client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 client.connect(('127.0.0.1', 59000))
 
@@ -10,7 +10,7 @@ def client_receive():
         try:
             message = client.recv(1024).decode('utf-8')
             if message == "user?":
-                client.send(alias.encode('utf-8'))
+                client.send(user.encode('utf-8'))
             else:
                 print(message)
         except:
@@ -21,7 +21,7 @@ def client_receive():
 
 def client_send():
     while True:
-        message = f'{alias}: {input("")}'
+        message = f'{user}: {input("")}'
         client.send(message.encode('utf-8'))
 
 
